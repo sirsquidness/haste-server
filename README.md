@@ -1,7 +1,18 @@
 
 This fork of hastebin is a simple change to allow hastebin to sit behind a 
-reverse proxy. For example, if haste is at http://host/haste/, 
+reverse proxy. For example, if haste is at http://host1/, and you want it 
+to be available at http://host2/haste/, then set urlpath="/haste" in 
+static/application.js. 
 
+An example nginx config for the reverse proxy is as such:
+
+> location /pb {
+>       rewrite /pb\/(.+) /$1 break;
+>       proxy_pass http://127.0.0.1:7777;
+> }
+
+Note that we rewrite the URL, so all HTTP requests from nginx to haste do not
+have the /haste/ subdirectory in the path. 
 
 # Haste
 
