@@ -1,4 +1,5 @@
 ///// represents a single document
+var urlpath = "/pb";
 
 var haste_document = function() {
   this.locked = false;
@@ -16,7 +17,7 @@ haste_document.prototype.htmlEscape = function(s) {
 // Get this document from the server and lock it here
 haste_document.prototype.load = function(key, callback, lang) {
   var _this = this;
-  $.ajax('/documents/' + key, {
+  $.ajax(urlpath + '/documents/' + key, {
     type: 'get',
     dataType: 'json',
     success: function(res) {
@@ -58,7 +59,7 @@ haste_document.prototype.save = function(data, callback) {
   }
   this.data = data;
   var _this = this;
-  $.ajax('/documents', {
+  $.ajax(urlpath + '/documents', {
     type: 'post',
     data: data,
     dataType: 'json',
@@ -148,7 +149,7 @@ haste.prototype.newDocument = function(hideHistory) {
   this.$box.hide();
   this.doc = new haste_document();
   if (!hideHistory) {
-    window.history.pushState(null, this.appName, '/');
+    window.history.pushState(null, this.appName,  urlpath);
   }
   this.setTitle();
   this.lightKey();
@@ -242,7 +243,7 @@ haste.prototype.lockDocument = function() {
     else if (ret) {
       _this.$code.html(ret.value);
       _this.setTitle(ret.key);
-      var file = '/' + ret.key;
+      var file = urlpath +  ret.key;
       if (ret.language) {
         file += '.' + _this.lookupExtensionByType(ret.language);
       }
@@ -301,7 +302,7 @@ haste.prototype.configureButtons = function() {
       },
       shortcutDescription: 'control + shift + r',
       action: function() {
-        window.location.href = '/raw/' + _this.doc.key;
+        window.location.href =  urlpath + 'raw/' + _this.doc.key;
       }
     },
     {
