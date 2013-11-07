@@ -243,7 +243,7 @@ haste.prototype.lockDocument = function() {
     else if (ret) {
       _this.$code.html(ret.value);
       _this.setTitle(ret.key);
-      var file = urlpath +  ret.key;
+      var file = urlpath + '/' +  ret.key;
       if (ret.language) {
         file += '.' + _this.lookupExtensionByType(ret.language);
       }

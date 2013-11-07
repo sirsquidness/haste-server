@@ -1,3 +1,8 @@
+
+This fork of hastebin is a simple change to allow hastebin to sit behind a 
+reverse proxy. For example, if haste is at http://host/haste/, 
+
+
 # Haste
 
 Haste is an open-source pastebin software written in node.js, which is easily
